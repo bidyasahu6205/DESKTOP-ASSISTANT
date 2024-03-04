@@ -52,7 +52,7 @@ def takecommand():
         return command.lower()  # Convert the command to lowercase for easier comparison
     except sr.UnknownValueError as e:
         print(f"could not understand audio.")
-        return None
+        return " "
 
 
 # runs when the program is runned
@@ -69,15 +69,20 @@ if __name__ == "__main__":
             print(result)
             speak(result)
         elif 'open youtube' in query:
+            speak("Opening youtube")
             webbrowser.open("youtube.com")
-        elif 'play mine game' in query:
+        elif 'explosive' in query:
+            speak("Opening the mine game")
             webbrowser.open("minesweeper-pro.com")
         elif 'open google' in query:
+            speak("Opening google")
             webbrowser.open("google.com")
-            
         elif 'the time' in query:
             strTime =datetime.datetime.now().strftime("%H:%M")
             speak(f" sir time is {strTime}")
+        elif ' ' in query:
+            speak("i m waiting")
         elif 'quit' in query:
-            break   
+            break
+        
         
