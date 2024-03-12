@@ -6,13 +6,10 @@ import concurrent.futures
 import wikipedia
 
 
-
 #used to take voices from window
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-engine.setProperty('voices',voices[1].id)
-
-
+engine.setProperty('voices',voices[0].id)
 
 
 #converts text to audio
@@ -24,13 +21,14 @@ def speak(audio):
 # wishes me whenever the program is runned
 def wish():
     hour=int(datetime.datetime.now().hour)
-    if hour>=0 and hour<12:
+    if 0<hour<12:
         speak("Good morning")
-    elif hour>=12 and hour<18:
+    elif 12<=hour<18:
         speak("Good afternoon")
     else:
          speak("Good evening")
     speak("Its good to see you. please tell me how may i help you")
+
 
 def takecommand():
     # Initialize the recognizer
@@ -41,7 +39,7 @@ def takecommand():
         print("Listening")
         recognizer.adjust_for_ambient_noise(source, duration = 1)  # Adjust for ambient noise
         try:
-            audio = recognizer.listen(source, timeout=2)
+            audio = recognizer.listen(source, timeout=5)
         except sr.WaitTimeoutError:
                 print("Speech recognition time out.")
                 return None
@@ -53,7 +51,7 @@ def takecommand():
     except sr.UnknownValueError as e:
         print(f"could not understand audio.")
         return " "
-
+    
 
 # runs when the program is runned
 if __name__ == "__main__":
@@ -82,7 +80,5 @@ if __name__ == "__main__":
             speak(f" sir time is {strTime}")
         elif ' ' in query:
             speak("i m waiting")
-        elif 'quit' in query:
-            break
-        
-        
+        elif 'stop' in query:
+            exit(0)
