@@ -50,7 +50,7 @@ def takecommand():
         return command.lower()  # Convert the command to lowercase for easier comparison
     except sr.UnknownValueError as e:
         print(f"could not understand audio.")
-        return " "
+        return "nothing"
     
 
 # runs when the program is runned
@@ -78,7 +78,7 @@ if __name__ == "__main__":
         elif 'the time' in query:
             strTime =datetime.datetime.now().strftime("%H:%M")
             speak(f" sir time is {strTime}")
-        elif ' ' in query:
+        elif 'nothing' in query:
             speak("i m waiting")
         elif 'stop' in query:
             exit(0)
