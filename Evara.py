@@ -7,17 +7,15 @@ import wikipedia
 
 
 #used to take voices from window
-engine = pyttsx3.init('sapi5')
-voices = engine.getProperty('voices')
-engine.setProperty('voices',voices[0].id)
+engine=pyttsx3.init()
+voices=engine.getProperty('voices')
+engine.setProperty('voice',voices[1].id)
 
 
 #converts text to audio
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
-
-
 # wishes me whenever the program is runned
 def wish():
     hour=int(datetime.datetime.now().hour)
