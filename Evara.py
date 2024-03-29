@@ -51,10 +51,14 @@ def takecommand():
     except sr.UnknownValueError as e:
         print(f"could not understand audio.")
         return "nothing"
-def sendemail(to, content):
-    server= smtplib.SMTP('smtp.gmail.com', 587)
-    server.login('makemytirp@gmail.com','just$a$demo')
     
+
+def sendEmail(to, content):
+    server= smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login('makemytirp@gmail.com','just$a$demo')
+    server.sendemail('makemytirp@gmail.com',to,content)
+
 
 # runs when the program is runned
 if __name__ == "__main__":
@@ -88,8 +92,8 @@ if __name__ == "__main__":
             try:
                 speak("What shoul I say")
                 content=takecommand()
-                to="bidyasahu6005@gmail.com"
-                sendemail(to, content)
+                to="mysteriousriya93@gmail.com"
+                sendEmail(to, content)
                 speak("Email has been sent")
             except Exception as e:
                 print(e)
