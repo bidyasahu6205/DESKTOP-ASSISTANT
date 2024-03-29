@@ -4,6 +4,8 @@ import pyttsx3
 import speech_recognition as sr
 import concurrent.futures
 import wikipedia
+import os
+import smtplib
 
 
 #used to take voices from window
@@ -49,6 +51,9 @@ def takecommand():
     except sr.UnknownValueError as e:
         print(f"could not understand audio.")
         return "nothing"
+def sendemail(to, content):
+    server= smtplib.SMTP('smtp.gmail.com', 587)
+    server.login('makemytirp@gmail.com','just$a$demo')
     
 
 # runs when the program is runned
@@ -75,8 +80,24 @@ if __name__ == "__main__":
             webbrowser.open("google.com")
         elif 'the time' in query:
             strTime =datetime.datetime.now().strftime("%H:%M")
-            speak(f" sir time is {strTime}")
+            speak(f" The time is {strTime}")
+        elif "open VS" in query:
+            codepath="C:\Users\Baibhab Sahu\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+            os.startfile(codepath)
+        elif "send email" in query:
+            try:
+                speak("What shoul I say")
+                content=takecommand()
+                to="bidyasahu6005@gmail.com"
+                sendemail(to, content)
+                speak("Email has been sent")
+            except Exception as e:
+                print(e)
+                speak("I apologize could not send email")
         elif 'nothing' in query:
-            speak("i m waiting")
+            for x in range(3):
+                speak("i m waiting")
+            speak("I will stop here have a nice day")
+            exit(0)
         elif 'stop' in query:
             exit(0)
