@@ -33,7 +33,6 @@ def wish():
 def takecommand():
     # Initialize the recognizer
     recognizer = sr.Recognizer()
-
     # Use the default microphone as the audio source
     with sr.Microphone() as source:
         print("Listening")
@@ -57,7 +56,7 @@ def sendEmail(to, content):
     server= smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.login('makemytirp@gmail.com','just$a$demo')
-    server.sendemail('makemytirp@gmail.com',to,content)
+    server.sendmail('makemytirp@gmail.com',to,content)
 
 
 # runs when the program is runned
@@ -85,8 +84,8 @@ if __name__ == "__main__":
         elif 'the time' in query:
             strTime =datetime.datetime.now().strftime("%H:%M")
             speak(f" The time is {strTime}")
-        elif "open VS" in query:
-            codepath="C:\Users\Baibhab Sahu\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+        elif "open vs" in query:
+            codepath="C:/Users/Baibhab Sahu/AppData/Local/Programs/Microsoft VS Code/Code.exe"
             os.startfile(codepath)
         elif "send email" in query:
             try:
@@ -99,9 +98,12 @@ if __name__ == "__main__":
                 print(e)
                 speak("I apologize could not send email")
         elif 'nothing' in query:
+            f=0
+            speak("i m waiting")
             for x in range(3):
-                speak("i m waiting")
-            speak("I will stop here have a nice day")
-            exit(0)
+                f=f+1
+            if f == 3:
+                speak("I will stop here have a nice day")
+                exit(0)
         elif 'stop' in query:
             exit(0)
